@@ -51,6 +51,8 @@ namespace SpaceShooterRevamped
             // TODO: Add your initialization logic here
             graphics.PreferredBackBufferWidth = ScreenWidth;
             graphics.PreferredBackBufferHeight = ScreenHeight;
+            graphics.HardwareModeSwitch = false;
+            graphics.IsFullScreen = true;
             graphics.ApplyChanges();
             
         }
