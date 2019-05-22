@@ -8,6 +8,7 @@ using System.Diagnostics;
 
 namespace SpaceShooter
 {
+    public enum GameState {Game, GameOver}
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
@@ -25,9 +26,10 @@ namespace SpaceShooter
         private static Texture2D rockTexture;
         private List<Sprite> sprites;
         private SpriteFont font;
-        public static float Score = 0;
 
-        public static bool playerIsDead = false;
+        public static float Score = 0;
+        public static GameState state = GameState.Game;
+
         public Game1()
         {   
             graphics = new GraphicsDeviceManager(this);
@@ -103,7 +105,7 @@ namespace SpaceShooter
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             //If player is dead the game stops
-            if (playerIsDead)
+            if (state == GameState.GameOver)
             {
                 return;
             }
@@ -141,20 +143,24 @@ namespace SpaceShooter
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.DarkGray);
-
-            // TODO: Add your drawing code here
+            
+           
             spriteBatch.Begin();
+            GraphicsDevice.Clear(Color.DarkGray);
             //Activates Draw methods in sprites
-            foreach (Sprite sprite in sprites)
-                sprite.Draw(spriteBatch);
+            
 
             //Draws score text and game over text
             spriteBatch.DrawString(font, "Score: " + Score, new Vector2(100, 100), Color.Black);
-            if (playerIsDead)
+            if (state == GameState.GameOver)
             {
-                spriteBatch.DrawString(font, "Game Over!", new Vector2(GraphicsDevice.DisplayMode.Width / 2, GraphicsDevice.DisplayMode.Height / 2), Color.Black);
+                spriteBatch.DrawString(font, "Game Over!", new Vector2(500, 250), Color.Black);
             }
+            foreach (Sprite sprite in sprites)
+            {
+                sprite.Draw(spriteBatch);
+            }
+
             spriteBatch.End();
             base.Draw(gameTime);
         }

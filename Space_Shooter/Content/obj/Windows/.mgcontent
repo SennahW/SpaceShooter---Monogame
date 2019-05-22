@@ -4,9 +4,9 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Programmering/SpaceShooter---Monogame/Space_Shooter/Content/Bob.png</File>
-    <File>C:/Programmering/SpaceShooter---Monogame/Space_Shooter/Content/rock.png</File>
-    <File>C:/Programmering/SpaceShooter---Monogame/Space_Shooter/Content/SpaceShipt.png</File>
-    <File>C:/Programmering/SpaceShooter---Monogame/Space_Shooter/Content/font.spritefont</File>
+    <File>C:/Users/Johannnes/Documents/GitHub/SpaceShooter---Monogame/Space_Shooter/Content/Bob.png</File>
+    <File>C:/Users/Johannnes/Documents/GitHub/SpaceShooter---Monogame/Space_Shooter/Content/rock.png</File>
+    <File>C:/Users/Johannnes/Documents/GitHub/SpaceShooter---Monogame/Space_Shooter/Content/SpaceShipt.png</File>
+    <File>C:/Users/Johannnes/Documents/GitHub/SpaceShooter---Monogame/Space_Shooter/Content/font.spritefont</File>
   </SourceFiles>
 </SourceFileCollection>

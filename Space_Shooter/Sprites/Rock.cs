@@ -41,7 +41,7 @@ namespace SpaceShooter.Sprites
                 if (sprite.Rectangle.Intersects(this.Rectangle) && sprite is Ship)
                 {
                     this.IsRemoved = true;
-                    Game1.playerIsDead = true;
+                    Game1.state = GameState.GameOver;
                 }
             }
             if (Position.X < 0 && Position.X > Game1.ScreenWidth+1)

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Programmering/SpaceShooter---Monogame/Space_Shooter/Content/Bob.png</SourceFile>
-  <SourceTime>2019-05-21T08:50:37.5560212+02:00</SourceTime>
-  <DestFile>C:/Programmering/SpaceShooter---Monogame/Space_Shooter/Content/bin/Windows/Bob.xnb</DestFile>
-  <DestTime>2019-05-21T20:16:51.6572387+02:00</DestTime>
+  <SourceFile>C:/Users/Johannnes/Documents/GitHub/SpaceShooter---Monogame/Space_Shooter/Content/Bob.png</SourceFile>
+  <SourceTime>2019-05-22T18:16:54.7379535+02:00</SourceTime>
+  <DestFile>C:/Users/Johannnes/Documents/GitHub/SpaceShooter---Monogame/Space_Shooter/Content/bin/Windows/Bob.xnb</DestFile>
+  <DestTime>2019-05-22T18:17:41.8285475+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
