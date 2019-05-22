@@ -1,12 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using SpaceShooterRevamped.Sprites;
+using SpaceShooter.Sprites;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace SpaceShooterRevamped
+namespace SpaceShooter
 {
     /// <summary>
     /// This is the main type for your game.
@@ -21,7 +21,7 @@ namespace SpaceShooterRevamped
         public static int ScreenHeight;
 
         public static double delay = 2f;
-        private double elapsed;
+        private double ShootDelayElapsed;
         private static Texture2D rockTexture;
         private List<Sprite> sprites;
         private SpriteFont font;
@@ -29,10 +29,10 @@ namespace SpaceShooterRevamped
 
         public static bool playerIsDead = false;
         public Game1()
-        {
+        {   
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            elapsed = delay;
+            ShootDelayElapsed = delay;
             Random = new Random();
 
             ScreenWidth = 1280;
@@ -64,7 +64,7 @@ namespace SpaceShooterRevamped
         protected override void LoadContent()
         {
             Console.WriteLine("Loading");
-            // Create a new SpriteBatch, which can be used to draw textures.
+            // Create a new SpriteBatch, and load texture
             spriteBatch = new SpriteBatch(GraphicsDevice);
             var shipTexture = Content.Load<Texture2D>("SpaceShipt");
             rockTexture = Content.Load<Texture2D>("rock");
@@ -75,7 +75,7 @@ namespace SpaceShooterRevamped
             {
                 new Ship(shipTexture)
                 {
-                    Position = new Vector2(100,100),
+                    Position = new Vector2(ScreenWidth / 2, ScreenHeight / 2),
                     Bullet = new Bullet(Content.Load<Texture2D>("Bob"))
                 },
                 new Rock(rockTexture)
@@ -99,23 +99,23 @@ namespace SpaceShooterRevamped
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-
+            //Esc to quit program
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            //If player is dead the game stops
             if (playerIsDead)
             {
                 return;
             }
-            elapsed -= (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if(elapsed <= 0f){
+            //Shooting mechanism
+            ShootDelayElapsed -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if(ShootDelayElapsed <= 0f){
                 Debug.WriteLine("Spawning");
                 sprites.Add(new Rock(rockTexture));
-                elapsed = delay;
+                ShootDelayElapsed = delay;
             }
 
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
+            //Updates the sprites
             foreach (var sprite in sprites.ToArray())
                 sprite.Update(gameTime, sprites);
 
@@ -124,6 +124,7 @@ namespace SpaceShooterRevamped
 
         private void PostUpdate()
         {
+            //Removes dead sprites from list.
             for (int i = 0; i < sprites.Count; i++)
             {
                 if (sprites[i].IsRemoved)
@@ -144,12 +145,15 @@ namespace SpaceShooterRevamped
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
+            //Activates Draw methods in sprites
             foreach (Sprite sprite in sprites)
                 sprite.Draw(spriteBatch);
+
+            //Draws score text and game over text
             spriteBatch.DrawString(font, "Score: " + Score, new Vector2(100, 100), Color.Black);
             if (playerIsDead)
             {
-                spriteBatch.DrawString(font, "Game Over!", new Vector2(ScreenWidth/2, ScreenHeight/2), Color.Black);
+                spriteBatch.DrawString(font, "Game Over!", new Vector2(GraphicsDevice.DisplayMode.Width / 2, GraphicsDevice.DisplayMode.Height / 2), Color.Black);
             }
             spriteBatch.End();
             base.Draw(gameTime);

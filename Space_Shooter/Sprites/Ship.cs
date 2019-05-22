@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpaceShooterRevamped.Sprites
+namespace SpaceShooter.Sprites
 {
     public class Ship : Sprite
     {
@@ -28,7 +28,6 @@ namespace SpaceShooterRevamped.Sprites
                 Right = Keys.D,
                 Shoot = Keys.Space
             };
-            
         }
 
         public override void Update(GameTime gameTime, List<Sprite> sprites)
@@ -37,11 +36,11 @@ namespace SpaceShooterRevamped.Sprites
             _currentKey = Keyboard.GetState();
 
             if (_currentKey.IsKeyDown(input.Left))
-                _rotation -= MathHelper.ToRadians(RotationVelocity);
+                rotation -= MathHelper.ToRadians(RotationVelocity);
             else if (_currentKey.IsKeyDown(input.Right))
-                _rotation += MathHelper.ToRadians(RotationVelocity);
+                rotation += MathHelper.ToRadians(RotationVelocity);
             
-            Direction = new Vector2((float)Math.Cos(_rotation), (float)Math.Sin(_rotation));
+            Direction = new Vector2((float)Math.Cos(rotation), (float)Math.Sin(rotation));
 
             if (_currentKey.IsKeyDown(input.Up))
                 velocity += Direction * LinearVelocity;

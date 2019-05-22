@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpaceShooterRevamped.Sprites
+namespace SpaceShooter.Sprites
 {
     public class Bullet : Sprite
     {
-        private float _timer;
+        private float timer;
 
         public Bullet(Texture2D texture)
             : base(texture)
@@ -20,9 +20,9 @@ namespace SpaceShooterRevamped.Sprites
 
         public override void Update(GameTime gameTime, List<Sprite> sprites)
         {
-            _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if(_timer > LifeSpan)
+            if(timer > LifeSpan)
             {
                 IsRemoved = true;
             }

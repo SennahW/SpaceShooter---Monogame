@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Diagnostics;
 
-namespace SpaceShooterRevamped.Sprites
+namespace SpaceShooter.Sprites
 {
     public class Rock : Sprite
     {
@@ -22,7 +22,7 @@ namespace SpaceShooterRevamped.Sprites
 
         public override void Update(GameTime gameTime, List<Sprite> sprites)
         {
-            _rotation += 0.01f;
+            rotation += 0.01f;
             Position += Direction * LinearVelocity;
             foreach(var sprite in sprites)
             {
@@ -50,8 +50,8 @@ namespace SpaceShooterRevamped.Sprites
             if(Position.Y < 0 && Position.Y > Game1.ScreenHeight+1)
                 IsRemoved = true;
 
-            if(_rotation >= 6.5f)
-                _rotation = 0f;
+            if(rotation >= 6.5f)
+                rotation = 0f;
         }
 
         
