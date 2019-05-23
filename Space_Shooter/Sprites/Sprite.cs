@@ -12,6 +12,8 @@ namespace SpaceShooter.Sprites
     public class Sprite : ICloneable
     {
         protected Texture2D _texture;
+        public float whichColor = 0;
+        public float colorCycle = 0;
         protected float rotation;
         protected KeyboardState _currentKey;
         protected KeyboardState _previousKey;
@@ -51,8 +53,28 @@ namespace SpaceShooter.Sprites
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(_texture, Position,null, Color.White,rotation,Origin, 1,SpriteEffects.None,0f);
+            if (whichColor == 0)
+            {
+                spriteBatch.Draw(_texture, Position, null, Color.White, rotation, Origin, 1, SpriteEffects.None, 0f);
+            }
+            else if (whichColor == 1)
+            {
+                spriteBatch.Draw(_texture, Position, null, Color.Red, rotation, Origin, 1, SpriteEffects.None, 0f);
+            }
+            else if (whichColor == 2)
+            {
+                spriteBatch.Draw(_texture, Position, null, Color.DarkOrange, rotation, Origin, 1, SpriteEffects.None, 0f);
+            }
+            else if (whichColor == 3)
+            {
+                spriteBatch.Draw(_texture, Position, null, Color.Orange, rotation, Origin, 1, SpriteEffects.None, 0f);
+            }
+            else if (whichColor == 4)
+            {
+                spriteBatch.Draw(_texture, Position, null, Color.LightSalmon, rotation, Origin, 1, SpriteEffects.None, 0f);
+            }
         }
+           
 
         public object Clone()
         {

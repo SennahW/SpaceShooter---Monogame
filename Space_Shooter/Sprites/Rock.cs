@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 using System.Diagnostics;
 
 namespace SpaceShooter.Sprites
@@ -32,7 +33,7 @@ namespace SpaceShooter.Sprites
                     this.IsRemoved = true;
                     sprite.IsRemoved = true;
                     Game1.Score++;
-                      Game1.delay = Math.Pow(Game1.delay, -0.5);
+                    Game1.delay = Math.Pow(Game1.delay, -0.5);
                 }
             }
             foreach (var sprite in sprites)
@@ -41,7 +42,8 @@ namespace SpaceShooter.Sprites
                 if (sprite.Rectangle.Intersects(this.Rectangle) && sprite is Ship)
                 {
                     this.IsRemoved = true;
-                    Game1.state = GameState.GameOver;
+                    Ship.HealthPoints -= 1;
+                    MediaPlayer.Play(Game1.damage);
                 }
             }
             if (Position.X < 0 && Position.X > Game1.ScreenWidth+1)

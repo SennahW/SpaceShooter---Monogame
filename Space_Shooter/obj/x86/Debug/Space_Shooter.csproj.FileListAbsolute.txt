@@ -113,3 +113,9 @@ C:\Users\Johannnes\Documents\GitHub\SpaceShooter---Monogame\Space_Shooter\obj\x8
 C:\Users\Johannnes\Documents\GitHub\SpaceShooter---Monogame\Space_Shooter\obj\x86\Debug\Space_Shooter.csproj.CopyComplete
 C:\Users\Johannnes\Documents\GitHub\SpaceShooter---Monogame\Space_Shooter\obj\x86\Debug\Space_Shooter.exe
 C:\Users\Johannnes\Documents\GitHub\SpaceShooter---Monogame\Space_Shooter\obj\x86\Debug\Space_Shooter.pdb
+C:\Users\Johannnes\Documents\GitHub\SpaceShooter---Monogame\Space_Shooter\bin\Windows\x86\Debug\Content\GameOver.wma
+C:\Users\Johannnes\Documents\GitHub\SpaceShooter---Monogame\Space_Shooter\bin\Windows\x86\Debug\Content\GameOver.xnb
+C:\Users\Johannnes\Documents\GitHub\SpaceShooter---Monogame\Space_Shooter\bin\Windows\x86\Debug\Content\Damage.wma
+C:\Users\Johannnes\Documents\GitHub\SpaceShooter---Monogame\Space_Shooter\bin\Windows\x86\Debug\Content\Damage.xnb
+C:\Users\Johannnes\Documents\GitHub\SpaceShooter---Monogame\Space_Shooter\bin\Windows\x86\Debug\Content\Bob.wma
+C:\Users\Johannnes\Documents\GitHub\SpaceShooter---Monogame\Space_Shooter\bin\Windows\x86\Debug\Content\Pew.xnb

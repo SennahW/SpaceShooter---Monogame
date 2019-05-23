@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 using SpaceShooter.Sprites;
 using System;
 using System.Collections.Generic;
@@ -26,8 +28,12 @@ namespace SpaceShooter
         private static Texture2D rockTexture;
         private List<Sprite> sprites;
         private SpriteFont font;
+        public static SoundEffect pew;
+        public static Song gameOver;
+        public static Song damage;
 
         public static float Score = 0;
+        public float playGameOverSound = 0;
         public static GameState state = GameState.Game;
 
         public Game1()
@@ -71,6 +77,9 @@ namespace SpaceShooter
             var shipTexture = Content.Load<Texture2D>("SpaceShipt");
             rockTexture = Content.Load<Texture2D>("rock");
             font = Content.Load<SpriteFont>("font");
+            pew = Content.Load<SoundEffect>("Pew");
+            gameOver = Content.Load<Song>("GameOver");
+            damage = Content.Load<Song>("Damage");
 
 
             sprites = new List<Sprite>
@@ -79,8 +88,7 @@ namespace SpaceShooter
                 {
                     Position = new Vector2(ScreenWidth / 2, ScreenHeight / 2),
                     Bullet = new Bullet(Content.Load<Texture2D>("Bob"))
-                },
-                new Rock(rockTexture)
+                }, new Rock(rockTexture)
             };
 
         }
@@ -105,8 +113,14 @@ namespace SpaceShooter
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             //If player is dead the game stops
+
             if (state == GameState.GameOver)
             {
+                playGameOverSound++;
+                if (playGameOverSound == 1)
+                {
+                    MediaPlayer.Play(gameOver);
+                }
                 return;
             }
             //Shooting mechanism
@@ -152,6 +166,7 @@ namespace SpaceShooter
 
             //Draws score text and game over text
             spriteBatch.DrawString(font, "Score: " + Score, new Vector2(100, 100), Color.Black);
+            spriteBatch.DrawString(font, "Lifes: " + Ship.HealthPoints, new Vector2(100, 50), Color.Black);
             if (state == GameState.GameOver)
             {
                 spriteBatch.DrawString(font, "Game Over!", new Vector2(500, 250), Color.Black);

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,8 @@ namespace SpaceShooter.Sprites
     public class Ship : Sprite
     {
         public Bullet Bullet;
+
+        public static float HealthPoints = 4;
 
         private Input input; //Using this to implement costum keybindings
 
@@ -54,6 +57,23 @@ namespace SpaceShooter.Sprites
                 AddBullet(sprites);
             }
 
+            if (HealthPoints == 1)
+            {
+                whichColor = 1;
+            }
+            else if (HealthPoints == 2)
+            {
+                whichColor = 2;
+            }
+            else if (HealthPoints == 3)
+            {
+                whichColor = 3;
+            }
+            if (HealthPoints <= 0)
+            {
+                Game1.state = GameState.GameOver;
+            }
+
             Position += velocity;
 
             //Checks if ship is outside of screen bounds and then "teleports" it back into screen!
@@ -87,6 +107,7 @@ namespace SpaceShooter.Sprites
 
         private void AddBullet(List<Sprite> sprites)
         {
+            Game1.pew.CreateInstance().Play();
             var bullet = Bullet.Clone() as Bullet;//Clones an instance of the bullet class
             bullet.Direction = this.Direction; //Set all parameters the same except the linearvelocity (bullets gotta go fast yo!)
             bullet.Position = this.Position;
@@ -95,7 +116,6 @@ namespace SpaceShooter.Sprites
             bullet.Parent = this;
 
             sprites.Add(bullet);//Add bullet to sprite List to be drawn and updated;
-
         }
     }
 }
