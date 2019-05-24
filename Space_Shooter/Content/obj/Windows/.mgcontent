@@ -8,5 +8,8 @@
     <File>C:/Programmering/SpaceShooter---Monogame/Space_Shooter/Content/rock.png</File>
     <File>C:/Programmering/SpaceShooter---Monogame/Space_Shooter/Content/SpaceShipt.png</File>
     <File>C:/Programmering/SpaceShooter---Monogame/Space_Shooter/Content/font.spritefont</File>
+    <File>C:/Programmering/SpaceShooter---Monogame/Space_Shooter/Content/GameOver.mp3</File>
+    <File>C:/Programmering/SpaceShooter---Monogame/Space_Shooter/Content/Damage.mp3</File>
+    <File>C:/Programmering/SpaceShooter---Monogame/Space_Shooter/Content/Pew.mp3</File>
   </SourceFiles>
 </SourceFileCollection>

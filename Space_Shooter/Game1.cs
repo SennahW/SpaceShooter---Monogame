@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 using SpaceShooter.Sprites;
 using System;
 using System.Collections.Generic;
@@ -8,10 +10,11 @@ using System.Diagnostics;
 
 namespace SpaceShooter
 {
+    public enum GameState {Game, GameOver}
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Game1 : Game 
+    public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -25,11 +28,16 @@ namespace SpaceShooter
         private static Texture2D rockTexture;
         private List<Sprite> sprites;
         private SpriteFont font;
-        public static float Score = 0;
+        public static Song pew;
+        public static Song gameOver;
+        public static Song damage;
 
-        public static bool playerIsDead = false;
+        public static float Score = 0;
+        public float playGameOverSound = 0;
+        public static GameState state = GameState.Game;
+
         public Game1()
-        {   
+        {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             ShootDelayElapsed = delay;
@@ -54,7 +62,7 @@ namespace SpaceShooter
             graphics.HardwareModeSwitch = false;
             graphics.IsFullScreen = true;
             graphics.ApplyChanges();
-            
+
         }
 
         /// <summary>
@@ -69,6 +77,9 @@ namespace SpaceShooter
             var shipTexture = Content.Load<Texture2D>("SpaceShipt");
             rockTexture = Content.Load<Texture2D>("rock");
             font = Content.Load<SpriteFont>("font");
+            pew = Content.Load<Song>("Pew");
+            gameOver = Content.Load<Song>("GameOver");
+            damage = Content.Load<Song>("Damage");
 
 
             sprites = new List<Sprite>
@@ -77,8 +88,7 @@ namespace SpaceShooter
                 {
                     Position = new Vector2(ScreenWidth / 2, ScreenHeight / 2),
                     Bullet = new Bullet(Content.Load<Texture2D>("Bob"))
-                },
-                new Rock(rockTexture)
+                }, new Rock(rockTexture)
             };
 
         }
@@ -92,6 +102,21 @@ namespace SpaceShooter
             // TODO: Unload any non ContentManager content here
         }
 
+        public void Restart()
+        {
+            delay = 2f;
+            Score = 0f;
+            playGameOverSound = 0;
+            foreach (Sprite sprite in sprites)
+            {
+                sprite.Restart();
+            }
+            Ship.HealthPoints = 4;
+            Ship.velocity = Vector2.Zero;
+            sprites[0].RestartSprite();
+            state = GameState.Game;
+        }
+
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
@@ -102,9 +127,17 @@ namespace SpaceShooter
             //Esc to quit program
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            if (Keyboard.GetState().IsKeyDown(Keys.R))
+                Restart();
+
             //If player is dead the game stops
-            if (playerIsDead)
+            if (state == GameState.GameOver)
             {
+                playGameOverSound++;
+                if (playGameOverSound == 1)
+                {
+                    MediaPlayer.Play(gameOver);
+                }
                 return;
             }
             //Shooting mechanism
@@ -141,20 +174,25 @@ namespace SpaceShooter
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.DarkGray);
-
-            // TODO: Add your drawing code here
+            
+           
             spriteBatch.Begin();
+            GraphicsDevice.Clear(Color.DarkGray);
             //Activates Draw methods in sprites
-            foreach (Sprite sprite in sprites)
-                sprite.Draw(spriteBatch);
+            
 
             //Draws score text and game over text
             spriteBatch.DrawString(font, "Score: " + Score, new Vector2(100, 100), Color.Black);
-            if (playerIsDead)
+            spriteBatch.DrawString(font, "Lifes: " + Ship.HealthPoints, new Vector2(100, 50), Color.Black);
+            if (state == GameState.GameOver)
             {
-                spriteBatch.DrawString(font, "Game Over!", new Vector2(GraphicsDevice.DisplayMode.Width / 2, GraphicsDevice.DisplayMode.Height / 2), Color.Black);
+                spriteBatch.DrawString(font, "Game Over!", new Vector2(500, 250), Color.Black);
             }
+            foreach (Sprite sprite in sprites)
+            {
+                sprite.Draw(spriteBatch);
+            }
+
             spriteBatch.End();
             base.Draw(gameTime);
         }
