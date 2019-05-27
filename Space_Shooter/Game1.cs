@@ -10,6 +10,7 @@ using System.Diagnostics;
 
 namespace SpaceShooter
 {
+    //Gamestates: GameOver; Game;
     public enum GameState {Game, GameOver}
     /// <summary>
     /// This is the main type for your game.
@@ -23,27 +24,34 @@ namespace SpaceShooter
         public static int ScreenWidth;
         public static int ScreenHeight;
 
-        public static double delay = 2f;
-        private double ShootDelayElapsed;
+        //Enemy spawn delay
+        public static double RockDelay = 10f;
+        //Shooting delay
+        private double RockDelayElapsed;
+        //Texture and font and makes the list of sprites
         private static Texture2D rockTexture;
-        private List<Sprite> sprites;
+        public static List<Sprite> sprites;
         private SpriteFont font;
+        //Sound effects
         public static Song pew;
         public static Song gameOver;
         public static Song damage;
 
+        //Game score
         public static float Score = 0;
+        //Makes sure the gameover sound only is played once
         public float playGameOverSound = 0;
+        //Gamestate variable
         public static GameState state = GameState.Game;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            ShootDelayElapsed = delay;
+            RockDelayElapsed = RockDelay;
             Random = new Random();
 
-            ScreenWidth = 1280;
+            ScreenWidth = 1080;
             ScreenHeight = 720;
         }
 
@@ -71,7 +79,6 @@ namespace SpaceShooter
         /// </summary>
         protected override void LoadContent()
         {
-            Console.WriteLine("Loading");
             // Create a new SpriteBatch, and load texture
             spriteBatch = new SpriteBatch(GraphicsDevice);
             var shipTexture = Content.Load<Texture2D>("SpaceShipt");
@@ -81,14 +88,15 @@ namespace SpaceShooter
             gameOver = Content.Load<Song>("GameOver");
             damage = Content.Load<Song>("Damage");
 
-
+            //Add sprites to sprites list.
             sprites = new List<Sprite>
             {
                 new Ship(shipTexture)
                 {
                     Position = new Vector2(ScreenWidth / 2, ScreenHeight / 2),
                     Bullet = new Bullet(Content.Load<Texture2D>("Bob"))
-                }, new Rock(rockTexture)
+                },
+                new Rock(rockTexture)
             };
 
         }
@@ -102,9 +110,10 @@ namespace SpaceShooter
             // TODO: Unload any non ContentManager content here
         }
 
+        //Resets all values for restarting the game
         public void Restart()
         {
-            delay = 2f;
+            RockDelay = 10f;
             Score = 0f;
             playGameOverSound = 0;
             foreach (Sprite sprite in sprites)
@@ -127,6 +136,7 @@ namespace SpaceShooter
             //Esc to quit program
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            //Restarts the game
             if (Keyboard.GetState().IsKeyDown(Keys.R))
                 Restart();
 
@@ -141,11 +151,12 @@ namespace SpaceShooter
                 return;
             }
             //Shooting mechanism
-            ShootDelayElapsed -= (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if(ShootDelayElapsed <= 0f){
+            RockDelayElapsed -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if(RockDelayElapsed <= 0f){
                 Debug.WriteLine("Spawning");
                 sprites.Add(new Rock(rockTexture));
-                ShootDelayElapsed = delay;
+                sprites.Add(new Meteor(rockTexture));
+                RockDelayElapsed = RockDelay;
             }
 
             //Updates the sprites
@@ -174,12 +185,8 @@ namespace SpaceShooter
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            
-           
             spriteBatch.Begin();
             GraphicsDevice.Clear(Color.DarkGray);
-            //Activates Draw methods in sprites
-            
 
             //Draws score text and game over text
             spriteBatch.DrawString(font, "Score: " + Score, new Vector2(100, 100), Color.Black);
@@ -188,6 +195,7 @@ namespace SpaceShooter
             {
                 spriteBatch.DrawString(font, "Game Over!", new Vector2(500, 250), Color.Black);
             }
+            //Updates every sprite
             foreach (Sprite sprite in sprites)
             {
                 sprite.Draw(spriteBatch);

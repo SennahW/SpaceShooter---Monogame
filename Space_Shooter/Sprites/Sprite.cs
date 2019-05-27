@@ -27,14 +27,14 @@ namespace SpaceShooter.Sprites
 
         public Sprite Parent;
 
-        public float LifeSpan = 0f;
+        public float LifeSpan = 0.5f;
 
         
         public bool IsRemoved = false;
 
         public void Restart()
         {
-            whichColor = 0;
+            whichColor = 0;                                
             colorCycle = 0;
             rotation = 0;
             Position = Vector2.Zero;

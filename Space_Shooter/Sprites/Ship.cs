@@ -14,6 +14,8 @@ namespace SpaceShooter.Sprites
     {
         public Bullet Bullet;
 
+        public static Vector2 pos;
+
         public static float HealthPoints = 4;
 
         private Input input; //Using this to implement costum keybindings
@@ -35,6 +37,7 @@ namespace SpaceShooter.Sprites
 
         public override void Update(GameTime gameTime, List<Sprite> sprites)
         {
+            pos = Position;
             _previousKey = _currentKey;
             _currentKey = Keyboard.GetState();
 
