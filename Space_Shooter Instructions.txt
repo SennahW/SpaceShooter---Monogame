@@ -1,0 +1,6 @@
+W - Forward
+A - Rotate right
+S - Back
+D - Rotate left
+Space - Shoot
+R - Restart game
