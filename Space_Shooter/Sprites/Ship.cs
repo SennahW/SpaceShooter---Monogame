@@ -36,7 +36,7 @@ namespace SpaceShooter.Sprites
         }
 
         public override void Update(GameTime gameTime, List<Sprite> sprites)
-        {
+        { 
             pos = Position;
             _previousKey = _currentKey;
             _currentKey = Keyboard.GetState();

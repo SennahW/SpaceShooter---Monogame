@@ -15,21 +15,18 @@ namespace SpaceShooter.Sprites
         public float whichColor = 0;
         public float colorCycle = 0;
         public float rotation;
+
         public KeyboardState _currentKey;
         public KeyboardState _previousKey;
-
         public Vector2 Position;
         public Vector2 Origin;
 
         public Vector2 Direction;
         public float RotationVelocity = 3f;
         public float LinearVelocity = 0.1f;
-
         public Sprite Parent;
 
         public float LifeSpan = 0.5f;
-
-        
         public bool IsRemoved = false;
 
         public void Restart()
@@ -89,6 +86,10 @@ namespace SpaceShooter.Sprites
             else if (whichColor == 4)
             {
                 spriteBatch.Draw(_texture, Position, null, Color.LightSalmon, rotation, Origin, 1, SpriteEffects.None, 0f);
+            }
+            else if (whichColor == 5)
+            {
+                spriteBatch.Draw(_texture, Position, null, Color.LightBlue, rotation, Origin, 1, SpriteEffects.None, 0f);
             }
         }
            

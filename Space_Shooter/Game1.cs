@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
 using SpaceShooter.Sprites;
 using System;
@@ -11,7 +10,7 @@ using System.Diagnostics;
 namespace SpaceShooter
 {
     //Gamestates: GameOver; Game;
-    public enum GameState {Game, GameOver}
+    public enum GameState { Game, GameOver }
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
@@ -28,6 +27,8 @@ namespace SpaceShooter
         public static double RockDelay = 10f;
         //Shooting delay
         private double RockDelayElapsed;
+        public static double MeteorDelay = 20f;
+        private double MeteorDelayElapsed;
         //Texture and font and makes the list of sprites
         private static Texture2D rockTexture;
         public static List<Sprite> sprites;
@@ -49,6 +50,7 @@ namespace SpaceShooter
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             RockDelayElapsed = RockDelay;
+            MeteorDelayElapsed = MeteorDelay;
             Random = new Random();
 
             ScreenWidth = 1080;
@@ -98,7 +100,6 @@ namespace SpaceShooter
                 },
                 new Rock(rockTexture)
             };
-
         }
 
         /// <summary>
@@ -150,20 +151,28 @@ namespace SpaceShooter
                 }
                 return;
             }
-            //Shooting mechanism
+            //Rock spawn 
             RockDelayElapsed -= (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if(RockDelayElapsed <= 0f){
+            if (RockDelayElapsed <= 0f)
+            {
                 Debug.WriteLine("Spawning");
                 sprites.Add(new Rock(rockTexture));
-                sprites.Add(new Meteor(rockTexture));
                 RockDelayElapsed = RockDelay;
+            }
+            //Meteor spawn
+            MeteorDelayElapsed -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (MeteorDelayElapsed <= 0f)
+            {
+                Debug.WriteLine("Spawning");
+                sprites.Add(new Meteor(rockTexture));
+                MeteorDelayElapsed = MeteorDelay;
             }
 
             //Updates the sprites
             foreach (var sprite in sprites.ToArray())
                 sprite.Update(gameTime, sprites);
 
-            PostUpdate(); //Handles all the sprites that are supposed to be dead
+            PostUpdate(); //Removes all dead sprites
         }
 
         private void PostUpdate()
@@ -195,7 +204,7 @@ namespace SpaceShooter
             {
                 spriteBatch.DrawString(font, "Game Over!", new Vector2(500, 250), Color.Black);
             }
-            //Updates every sprite
+            //Draws every sprite
             foreach (Sprite sprite in sprites)
             {
                 sprite.Draw(spriteBatch);

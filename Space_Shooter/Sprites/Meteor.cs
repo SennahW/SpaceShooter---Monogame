@@ -21,6 +21,7 @@ namespace SpaceShooter.Sprites
 
         public override void Update(GameTime gameTime, List<Sprite> sprites)
         {
+            whichColor = 5;
             Direction = new Vector2((float)Math.Cos(rotation), (float)Math.Sin(rotation));
             Position += Direction * LinearVelocity / 2;
             Vector2 diff = Position - Ship.pos;
@@ -34,7 +35,7 @@ namespace SpaceShooter.Sprites
                     this.IsRemoved = true;
                     sprite.IsRemoved = true;
                     Game1.Score++;
-                    Game1.RockDelay = Math.Pow(Game1.RockDelay, -0.1);
+                    Game1.MeteorDelay = Math.Pow(Game1.MeteorDelay, -0.1);
                 }
             }
             foreach (var sprite in sprites)
