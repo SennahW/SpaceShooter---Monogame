@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Programmering/SpaceShooter---Monogame/Space_Shooter/Content/rock.png</SourceFile>
-  <SourceTime>2019-05-21T08:50:37.5590136+02:00</SourceTime>
-  <DestFile>C:/Programmering/SpaceShooter---Monogame/Space_Shooter/Content/bin/Windows/rock.xnb</DestFile>
-  <DestTime>2019-05-24T10:07:24.4007304+02:00</DestTime>
+  <SourceFile>C:/Users/Johannnes/Documents/GitHub/SpaceShooter---Monogame/Space_Shooter/Content/rock.png</SourceFile>
+  <SourceTime>2019-05-22T18:16:54.7449348+02:00</SourceTime>
+  <DestFile>C:/Users/Johannnes/Documents/GitHub/SpaceShooter---Monogame/Space_Shooter/Content/bin/Windows/rock.xnb</DestFile>
+  <DestTime>2019-05-28T20:30:46.0766439+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

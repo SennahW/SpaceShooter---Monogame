@@ -126,3 +126,4 @@ C:\Programmering\SpaceShooter---Monogame\Space_Shooter\bin\Windows\x86\Debug\Con
 C:\Programmering\SpaceShooter---Monogame\Space_Shooter\bin\Windows\x86\Debug\Content\GameOver.xnb
 C:\Programmering\SpaceShooter---Monogame\Space_Shooter\bin\Windows\x86\Debug\Content\Pew.xnb
 C:\Programmering\SpaceShooter---Monogame\Space_Shooter\bin\Windows\x86\Debug\Content\Pew.wma
+C:\Users\Johannnes\Documents\GitHub\SpaceShooter---Monogame\Space_Shooter\bin\Windows\x86\Debug\Content\Pew.wma

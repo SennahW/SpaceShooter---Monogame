@@ -58,7 +58,7 @@ namespace SpaceShooter.Sprites
 
         
         private Vector2 SpawnPosition(){
-            switch(random.Next(1,4)){
+            switch(random.Next(1,5)){
                 case 1:
                     Direction = new Vector2(1,0);
                     return new Vector2(0,random.Next(100,600));

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Programmering/SpaceShooter---Monogame/Space_Shooter/Content/Pew.mp3</SourceFile>
-  <SourceTime>2019-05-24T10:12:56.4243793+02:00</SourceTime>
-  <DestFile>C:/Programmering/SpaceShooter---Monogame/Space_Shooter/Content/bin/Windows/Pew.xnb</DestFile>
-  <DestTime>2019-05-24T12:57:41.8218975+02:00</DestTime>
+  <SourceFile>C:/Users/Johannnes/Documents/GitHub/SpaceShooter---Monogame/Space_Shooter/Content/Pew.mp3</SourceFile>
+  <SourceTime>2019-05-26T22:50:06.5617399+02:00</SourceTime>
+  <DestFile>C:/Users/Johannnes/Documents/GitHub/SpaceShooter---Monogame/Space_Shooter/Content/bin/Windows/Pew.xnb</DestFile>
+  <DestTime>2019-05-28T20:30:46.7957213+02:00</DestTime>
   <Importer>Mp3Importer</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>SongProcessor</Processor>
@@ -15,6 +15,6 @@
   <Dependencies />
   <BuildAsset />
   <BuildOutput>
-    <string>C:/Programmering/SpaceShooter---Monogame/Space_Shooter/Content/bin/Windows/Pew.wma</string>
+    <string>C:/Users/Johannnes/Documents/GitHub/SpaceShooter---Monogame/Space_Shooter/Content/bin/Windows/Pew.wma</string>
   </BuildOutput>
 </PipelineBuildEvent>
