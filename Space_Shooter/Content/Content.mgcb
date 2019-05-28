@@ -74,3 +74,10 @@
 /processorParam:Quality=Best
 /build:Pew.mp3
 
+#begin fontSmall.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:fontSmall.spritefont
+

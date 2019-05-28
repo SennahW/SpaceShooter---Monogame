@@ -36,6 +36,7 @@ namespace SpaceShooter
         private static Texture2D rockTexture;
         public static List<Sprite> sprites;
         private SpriteFont font;
+        private SpriteFont fontSmall;
         //Sound effects
         public static Song pew;
         public static Song gameOver;
@@ -87,11 +88,12 @@ namespace SpaceShooter
             var shipTexture = Content.Load<Texture2D>("SpaceShipt");
             rockTexture = Content.Load<Texture2D>("rock");
             font = Content.Load<SpriteFont>("font");
+            fontSmall = Content.Load<SpriteFont>("fontSmall");
             pew = Content.Load<Song>("Pew");
             gameOver = Content.Load<Song>("GameOver");
             damage = Content.Load<Song>("Damage");
 
-            menu = new Menu(font);
+            menu = new Menu(font, fontSmall);
             //Add sprites to sprites list.
             sprites = new List<Sprite>
             {
@@ -117,6 +119,7 @@ namespace SpaceShooter
         public void Restart()
         {
             RockDelay = 10f;
+            MeteorDelay = 20f;
             Score = 0f;
             foreach (Sprite sprite in sprites)
             {
@@ -146,7 +149,7 @@ namespace SpaceShooter
                     Restart();
                 return;
             }
-            if (state == GameState.Game)
+            else if (state == GameState.Game)
             {
                 //Rock spawn 
                 RockDelayElapsed -= (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -169,7 +172,7 @@ namespace SpaceShooter
                 foreach (var sprite in sprites.ToArray())
                     sprite.Update(gameTime, sprites);
             }
-            if (state == GameState.Menu)
+            else if (state == GameState.Menu)
             {
                 menu.Update(gameTime);
             }
@@ -201,6 +204,7 @@ namespace SpaceShooter
             if (state == GameState.GameOver)
             {
                 spriteBatch.DrawString(font, "Game Over!", new Vector2(500, 250), Color.Black);
+                spriteBatch.DrawString(font, "Press R to restart", new Vector2(500, 200), Color.Black);
             }
             if (state == GameState.Game)
             {

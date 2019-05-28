@@ -31,7 +31,8 @@ namespace SpaceShooter.Sprites
                 Down = Keys.S,
                 Left = Keys.A,
                 Right = Keys.D,
-                Shoot = Keys.Space
+                Shoot = Keys.Space,
+                Brake = Keys.LeftShift,
             };
         }
 
@@ -52,6 +53,14 @@ namespace SpaceShooter.Sprites
                 velocity += Direction * LinearVelocity;
             else if (_currentKey.IsKeyDown(input.Down))
                 velocity -= Direction * LinearVelocity;
+            if (_currentKey.IsKeyDown(input.Brake) && LinearVelocity > 0)
+            {
+                velocity = Vector2.Zero;
+            }
+            else
+            {
+                LinearVelocity = 0.1f;
+            }
 
             //Shoot mechanism
             if (_currentKey.IsKeyDown(input.Shoot) &&
@@ -115,7 +124,7 @@ namespace SpaceShooter.Sprites
             bullet.Direction = this.Direction; //Set all parameters the same except the linearvelocity (bullets gotta go fast yo!)
             bullet.Position = this.Position;
             bullet.LinearVelocity = this.LinearVelocity * 80;
-            bullet.LifeSpan = 2f;
+            bullet.LifeSpan = 1.5f;
             bullet.Parent = this;
 
             sprites.Add(bullet);//Add bullet to sprite List to be drawn and updated;

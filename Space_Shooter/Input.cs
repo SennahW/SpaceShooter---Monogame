@@ -15,5 +15,6 @@ namespace SpaceShooter
         public Keys Down { get; set; }
         public Keys Shoot { get; set; }
         public Keys Enter { get; set; }
+        public Keys Brake { get; set; }
     }
 }

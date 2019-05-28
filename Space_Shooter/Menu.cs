@@ -10,11 +10,13 @@ namespace Space_Shooter
         private float whichOptionIsSelected = 0;
         private Input input; //Using this to implement costum keybindings
         private SpriteFont font;
+        private SpriteFont fontSmall;
         private KeyboardState currentKey;
 
-        public Menu(SpriteFont _font)
+        public Menu(SpriteFont _font, SpriteFont _fontSmall)
         {
             font = _font;
+            fontSmall = _fontSmall;
             input = new Input
             {
                 Up = Keys.W,
@@ -57,6 +59,8 @@ namespace Space_Shooter
                     spriteBatch.DrawString(font, "> Quit game", new Vector2(500, 350), Color.White);
                     break;
             }
+            spriteBatch.DrawString(fontSmall, "Use W and S to navigate the menu", new Vector2(100, 50), Color.White);
+            spriteBatch.DrawString(fontSmall, "Select your choice by pressing Enter", new Vector2(100, 100), Color.White);
         }
     }
 }
