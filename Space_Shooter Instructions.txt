@@ -6,3 +6,4 @@ Space - Shoot
 Enter - Select menu option
 R - Restart game
 Esc - Quit program
+Left Shift - Handbrake
