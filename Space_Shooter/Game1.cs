@@ -43,8 +43,6 @@ namespace SpaceShooter
 
         //Game score
         public static float Score = 0;
-        //Makes sure the gameover sound only is played once
-        public float playGameOverSound = 0;
         //Gamestate variable
         public static GameState state = GameState.Menu;
 
@@ -120,7 +118,6 @@ namespace SpaceShooter
         {
             RockDelay = 10f;
             Score = 0f;
-            playGameOverSound = 0;
             foreach (Sprite sprite in sprites)
             {
                 sprite.Restart();
@@ -141,19 +138,12 @@ namespace SpaceShooter
             //Esc to quit program
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)|| Exit == true)
                 Exit();
-            //Restarts the game
-            
 
             //If player is dead the game stops
             if (state == GameState.GameOver)
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.R))
                     Restart();
-                playGameOverSound++;
-                if (playGameOverSound == 1)
-                {
-                    MediaPlayer.Play(gameOver);
-                }
                 return;
             }
             if (state == GameState.Game)

@@ -75,6 +75,7 @@ namespace SpaceShooter.Sprites
             if (HealthPoints <= 0)
             {
                 Game1.state = GameState.GameOver;
+                MediaPlayer.Play(Game1.gameOver);
             }
 
             Position += velocity;
