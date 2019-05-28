@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using Space_Shooter;
 using SpaceShooter.Sprites;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Diagnostics;
 namespace SpaceShooter
 {
     //Gamestates: GameOver; Game;
-    public enum GameState { Game, GameOver }
+    public enum GameState { Game, GameOver, Menu }
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
@@ -18,6 +19,8 @@ namespace SpaceShooter
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        public static bool Exit;
+        public Menu menu;
 
         public static Random Random;
         public static int ScreenWidth;
@@ -43,7 +46,7 @@ namespace SpaceShooter
         //Makes sure the gameover sound only is played once
         public float playGameOverSound = 0;
         //Gamestate variable
-        public static GameState state = GameState.Game;
+        public static GameState state = GameState.Menu;
 
         public Game1()
         {
@@ -90,6 +93,7 @@ namespace SpaceShooter
             gameOver = Content.Load<Song>("GameOver");
             damage = Content.Load<Song>("Damage");
 
+            menu = new Menu(font);
             //Add sprites to sprites list.
             sprites = new List<Sprite>
             {
@@ -135,15 +139,16 @@ namespace SpaceShooter
         protected override void Update(GameTime gameTime)
         {
             //Esc to quit program
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)|| Exit == true)
                 Exit();
             //Restarts the game
-            if (Keyboard.GetState().IsKeyDown(Keys.R))
-                Restart();
+            
 
             //If player is dead the game stops
             if (state == GameState.GameOver)
             {
+                if (Keyboard.GetState().IsKeyDown(Keys.R))
+                    Restart();
                 playGameOverSound++;
                 if (playGameOverSound == 1)
                 {
@@ -151,27 +156,33 @@ namespace SpaceShooter
                 }
                 return;
             }
-            //Rock spawn 
-            RockDelayElapsed -= (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (RockDelayElapsed <= 0f)
+            if (state == GameState.Game)
             {
-                Debug.WriteLine("Spawning");
-                sprites.Add(new Rock(rockTexture));
-                RockDelayElapsed = RockDelay;
+                //Rock spawn 
+                RockDelayElapsed -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (RockDelayElapsed <= 0f)
+                {
+                    Debug.WriteLine("Spawning");
+                    sprites.Add(new Rock(rockTexture));
+                    RockDelayElapsed = RockDelay;
+                }
+                //Meteor spawn
+                MeteorDelayElapsed -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (MeteorDelayElapsed <= 0f)
+                {
+                    Debug.WriteLine("Spawning");
+                    sprites.Add(new Meteor(rockTexture));
+                    MeteorDelayElapsed = MeteorDelay;
+                }
+
+                //Updates the sprites
+                foreach (var sprite in sprites.ToArray())
+                    sprite.Update(gameTime, sprites);
             }
-            //Meteor spawn
-            MeteorDelayElapsed -= (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (MeteorDelayElapsed <= 0f)
+            if (state == GameState.Menu)
             {
-                Debug.WriteLine("Spawning");
-                sprites.Add(new Meteor(rockTexture));
-                MeteorDelayElapsed = MeteorDelay;
+                menu.Update(gameTime);
             }
-
-            //Updates the sprites
-            foreach (var sprite in sprites.ToArray())
-                sprite.Update(gameTime, sprites);
-
             PostUpdate(); //Removes all dead sprites
         }
 
@@ -197,19 +208,25 @@ namespace SpaceShooter
             spriteBatch.Begin();
             GraphicsDevice.Clear(Color.DarkGray);
 
-            //Draws score text and game over text
-            spriteBatch.DrawString(font, "Score: " + Score, new Vector2(100, 100), Color.Black);
-            spriteBatch.DrawString(font, "Lifes: " + Ship.HealthPoints, new Vector2(100, 50), Color.Black);
             if (state == GameState.GameOver)
             {
                 spriteBatch.DrawString(font, "Game Over!", new Vector2(500, 250), Color.Black);
             }
-            //Draws every sprite
-            foreach (Sprite sprite in sprites)
+            if (state == GameState.Game)
             {
-                sprite.Draw(spriteBatch);
+                //Draws score text and game over text
+                spriteBatch.DrawString(font, "Score: " + Score, new Vector2(100, 100), Color.Black);
+                spriteBatch.DrawString(font, "Lifes: " + Ship.HealthPoints, new Vector2(100, 50), Color.Black);
+                //Draws every sprite
+                foreach (Sprite sprite in sprites)
+                {
+                    sprite.Draw(spriteBatch);
+                }
             }
-
+            if (state == GameState.Menu)
+            {
+                menu.Draw(spriteBatch);
+            }
             spriteBatch.End();
             base.Draw(gameTime);
         }
