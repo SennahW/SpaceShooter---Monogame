@@ -1,7 +1,8 @@
-W - Forward
+W - Forward & navigate start menu
 A - Rotate right
-S - Back
+S - Back & navigate start menu
 D - Rotate left
 Space - Shoot
+Enter - Select menu option
 R - Restart game
 Esc - Quit program
