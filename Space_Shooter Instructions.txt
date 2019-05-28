@@ -4,3 +4,4 @@ S - Back
 D - Rotate left
 Space - Shoot
 R - Restart game
+Esc - Quit program
