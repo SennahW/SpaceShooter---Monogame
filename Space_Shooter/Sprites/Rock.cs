@@ -23,8 +23,11 @@ namespace SpaceShooter.Sprites
 
         public override void Update(GameTime gameTime, List<Sprite> sprites)
         {
+            
             rotation += 0.01f;
             Position += Direction * LinearVelocity;
+
+            //Checks hitboxes
             foreach(var sprite in sprites)
             {
                 if (sprite == this) continue;
@@ -46,6 +49,8 @@ namespace SpaceShooter.Sprites
                     MediaPlayer.Play(Game1.damage);
                 }
             }
+
+            //Removes if off screen
             if (Position.X < 0 && Position.X > Game1.ScreenWidth+1)
                 IsRemoved = true;
 
@@ -56,7 +61,7 @@ namespace SpaceShooter.Sprites
                 rotation = 0f;
         }
 
-        
+        //Selects random spawnposition
         private Vector2 SpawnPosition(){
             switch(random.Next(1,5)){
                 case 1:
