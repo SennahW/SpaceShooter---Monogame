@@ -16,6 +16,8 @@ namespace SpaceShooter.Sprites
 
         public static Vector2 pos;
 
+        public static Vector2 position;
+
         public static float HealthPoints = 4;
 
         private Input input; //Using this to implement costum keybindings
@@ -41,7 +43,6 @@ namespace SpaceShooter.Sprites
             pos = Position;
             _previousKey = _currentKey;
             _currentKey = Keyboard.GetState();
-
             if (_currentKey.IsKeyDown(input.Left))
                 rotation -= MathHelper.ToRadians(RotationVelocity);
             else if (_currentKey.IsKeyDown(input.Right))

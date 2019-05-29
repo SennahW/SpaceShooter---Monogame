@@ -124,6 +124,7 @@ namespace SpaceShooter
             foreach (Sprite sprite in sprites)
             {
                 sprite.Restart();
+                sprite.Position = new Vector2(ScreenWidth / 2, ScreenHeight / 2);
             }
             Ship.HealthPoints = 4;
             Ship.velocity = Vector2.Zero;
@@ -151,11 +152,14 @@ namespace SpaceShooter
             }
             else if (state == GameState.Game)
             {
+
+                if (Keyboard.GetState().IsKeyDown(Keys.R))
+                    Restart();
                 //Rock spawn 
                 RockDelayElapsed -= (float)gameTime.ElapsedGameTime.TotalSeconds;
                 if (RockDelayElapsed <= 0f)
                 {
-                    Debug.WriteLine("Spawning");
+                    Debug.WriteLine("Spawninwg");
                     sprites.Add(new Rock(rockTexture));
                     RockDelayElapsed = RockDelay;
                 }
