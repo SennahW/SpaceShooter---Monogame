@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Johannnes/Documents/GitHub/SpaceShooter---Monogame/Space_Shooter/Content/Damage.mp3</SourceFile>
-  <SourceTime>2019-05-23T21:52:56.1744003+02:00</SourceTime>
-  <DestFile>C:/Users/Johannnes/Documents/GitHub/SpaceShooter---Monogame/Space_Shooter/Content/bin/Windows/Damage.xnb</DestFile>
-  <DestTime>2019-05-28T20:30:46.6570926+02:00</DestTime>
+  <SourceFile>C:/Programmering/SpaceShooter---Monogame/Space_Shooter/Content/Damage.mp3</SourceFile>
+  <SourceTime>2019-05-29T08:22:26.8330237+02:00</SourceTime>
+  <DestFile>C:/Programmering/SpaceShooter---Monogame/Space_Shooter/Content/bin/Windows/Damage.xnb</DestFile>
+  <DestTime>2019-05-29T08:23:06.9012254+02:00</DestTime>
   <Importer>Mp3Importer</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>SongProcessor</Processor>
@@ -15,6 +15,6 @@
   <Dependencies />
   <BuildAsset />
   <BuildOutput>
-    <string>C:/Users/Johannnes/Documents/GitHub/SpaceShooter---Monogame/Space_Shooter/Content/bin/Windows/Damage.wma</string>
+    <string>C:/Programmering/SpaceShooter---Monogame/Space_Shooter/Content/bin/Windows/Damage.wma</string>
   </BuildOutput>
 </PipelineBuildEvent>
