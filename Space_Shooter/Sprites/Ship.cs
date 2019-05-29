@@ -40,6 +40,7 @@ namespace SpaceShooter.Sprites
 
         public override void Update(GameTime gameTime, List<Sprite> sprites)
         { 
+            //Updates rotation
             pos = Position;
             _previousKey = _currentKey;
             _currentKey = Keyboard.GetState();
@@ -50,10 +51,13 @@ namespace SpaceShooter.Sprites
 
             Direction = new Vector2((float)Math.Cos(rotation), (float)Math.Sin(rotation));
 
+            //Updates position
             if (_currentKey.IsKeyDown(input.Up))
                 velocity += Direction * LinearVelocity;
             else if (_currentKey.IsKeyDown(input.Down))
                 velocity -= Direction * LinearVelocity;
+
+            //Handbrake
             if (_currentKey.IsKeyDown(input.Brake) && LinearVelocity > 0)
             {
                 velocity = Vector2.Zero;
@@ -70,6 +74,7 @@ namespace SpaceShooter.Sprites
                 AddBullet(sprites);
             }
 
+            //Color of spaceship based on HP
             if (HealthPoints == 1)
             {
                 whichColor = 1;
@@ -95,6 +100,7 @@ namespace SpaceShooter.Sprites
 
         }
 
+        //Så att man är på skärmen
         private void PositionCheck()
         {
             //X-Axis
@@ -118,6 +124,7 @@ namespace SpaceShooter.Sprites
             }
         }
 
+        //Spawns bullet
         private void AddBullet(List<Sprite> sprites)
         {
             MediaPlayer.Play(Game1.pew);

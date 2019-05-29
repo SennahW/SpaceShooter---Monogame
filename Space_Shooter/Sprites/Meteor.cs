@@ -21,12 +21,16 @@ namespace SpaceShooter.Sprites
 
         public override void Update(GameTime gameTime, List<Sprite> sprites)
         {
+            //WhichColor for drawing color
             whichColor = 5;
+
+            //Targeting
             Direction = new Vector2((float)Math.Cos(rotation), (float)Math.Sin(rotation));
             Position += Direction * LinearVelocity / 2;
             Vector2 diff = Position - Ship.pos;
             rotation = (float)Math.Atan2(diff.Y, diff.X) - (float)(Math.PI);
 
+            //Checks hitboxex
             foreach (var sprite in sprites)
             {
                 if (sprite == this) continue;
@@ -49,6 +53,7 @@ namespace SpaceShooter.Sprites
                 }
             }
 
+            //Removes if off screen
             if (Position.X < 0 && Position.X > Game1.ScreenWidth+1)
                 IsRemoved = true;
 
@@ -59,7 +64,7 @@ namespace SpaceShooter.Sprites
                 rotation = 0f;
         }
 
-        
+        //Select random spwanposition
         private Vector2 SpawnPosition(){
             switch(Game1.Random.Next(1,4)){
                 case 1:
